@@ -1,0 +1,7 @@
+.tool-bar-popover.figure-selector {
+    transform: translateX(-75px);
+}
+
+.tool-bar-popover.figure-selector:before {
+    transform: translateX(75px);
+}

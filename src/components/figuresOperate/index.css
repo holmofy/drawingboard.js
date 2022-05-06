@@ -1,0 +1,12 @@
+.tool-operate>svg[data-active="true"] {
+  fill: var(--fillColor);
+}
+
+.tool-operate>svg[data-active="false"] {
+  fill: #eee;
+}
+
+.tool-operate>svg[data-active="true"]:active {
+  fill: var(--fillColor);
+  transition: fill ease-in-out 0.1s;
+}

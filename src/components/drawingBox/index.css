@@ -1,0 +1,16 @@
+.drawing-box {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  touch-action: none;
+  box-sizing: border-box;
+}
+
+.drawing-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
