@@ -7,6 +7,7 @@ import { createRect } from "../../utils/svg/createRectUtil";
 import { createCircle } from "../../utils/svg/createCircleUtil";
 import { createTriangle } from "../../utils/svg/createTriangleUtil";
 import { createBessel } from "../../utils/svg/createBesselUtil";
+import { createFreeHandPath } from "../../utils/svg/createFreeHandPathUtil";
 import createSvgChildUtil from "../../utils/svg/createSvgChildUtil";
 import useUnload from "../../utils/unload";
 import saveToIndexDb from "../../utils/saveToIndexDbUtil";
@@ -77,6 +78,7 @@ function DrawingBox() {
     let handleDrawing = function () { };
     const { type } = drawingStyle;
     if (type === "path") handleDrawing = createPath;
+    else if (type === 'freeHand') handleDrawing = createFreeHandPath;
     else if (type === "line") handleDrawing = createLine;
     else if (type === "rect") handleDrawing = createRect;
     else if (type === "circle") handleDrawing = createCircle;
@@ -93,7 +95,7 @@ function DrawingBox() {
     if (onTouch) return;
     onPainting = false;
     if (!figure?.flag) return;
-    const lastFigure = { ...figure };
+    const lastFigure = { end: true, ...figure };
     figure.type = "";
     newAction({ type: "ADD_NEW_FIGURE", figure: lastFigure });
   }
@@ -135,7 +137,6 @@ function DrawingBox() {
       requested = false;
     }
   }, [figure]);
-
   return (
     <Fragment>
       <svg

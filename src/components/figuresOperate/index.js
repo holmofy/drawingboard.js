@@ -60,6 +60,7 @@ function FiguresOperate() {
         xmlns="http://www.w3.org/2000/svg"
         width="28"
         height="28"
+        data-active={!!state.figures?.length}
         onClick={handleClear}
       >
         <path d="M298.666667 109.25l426.666667 0 0 85.333333-426.666667 1e-8 0-85.33333301Z"></path>

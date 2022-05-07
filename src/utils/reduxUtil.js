@@ -19,6 +19,7 @@ function handleAction(state = defaultState, action) {
   } = action;
   if (type === "INIT_FIGURES") {
     action.figures.forEach(f => state.figures.push(f));
+    Figures.addStatus(state.figures);
     return {
       ...state
     };

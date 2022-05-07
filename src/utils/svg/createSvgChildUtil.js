@@ -10,6 +10,7 @@ function createSvgChildUtil(item, index) {
   if (type === "empty") return null;
   let getPath = function () { };
   if (type === "path") getPath = renderPath;
+  else if (type === "freeHand") getPath = renderPath;
   else if (type === "line") getPath = renderLine;
   else if (type === "rect") getPath = renderRect;
   else if (type === "circle") getPath = renderCircle;

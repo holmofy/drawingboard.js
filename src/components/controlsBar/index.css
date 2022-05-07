@@ -72,6 +72,6 @@
 
 svg.tool-bar-item {
   fill: var(--fillColor);
-  transition: color .3s;
+  transition: color .5s;
   height: 100%;
 }

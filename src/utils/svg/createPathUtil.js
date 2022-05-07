@@ -1,6 +1,6 @@
-function createPath(e, figures) {
+function createPath(e, figure) {
   const { nativeEvent } = e;
-  figures.path += `L${nativeEvent.offsetX} ${nativeEvent.offsetY}`;
+  figure.path += `L${nativeEvent.offsetX} ${nativeEvent.offsetY}`;
 }
 
 function renderPath(figure, index) {
