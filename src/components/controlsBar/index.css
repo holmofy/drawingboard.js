@@ -1,6 +1,6 @@
 .tool-bar-wrap {
   position: fixed;
-  bottom: 25px;
+  bottom: -100px;
   left: 0;
   right: 0;
   height: 50px;
@@ -11,6 +11,8 @@
 }
 
 .tool-bar {
+  position: relative;
+  top: -120px;
   height: 100%;
   touch-action: pan-x;
   display: flex;
