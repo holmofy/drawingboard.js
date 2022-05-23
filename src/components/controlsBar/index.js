@@ -14,11 +14,11 @@ let onTouch = false,
   lastX = null,
   lastY = null;
 
-function ToolBar({ viewport }) {
+function ToolBar() {
   const wrapRef = useRef();
   const [transform, setTransform] = useState({ transX: 0, transY: 0 });
   const { transX, transY } = transform;
-  const { width, height } = viewport;
+  const { innerWidth: width, innerHeight: height } = window;
   const { drawingStyle } = useSelector((state) => state);
 
   function handleWheel(e) {
