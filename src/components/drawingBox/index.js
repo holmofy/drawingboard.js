@@ -19,7 +19,7 @@ let onPainting = false;
 let updated = false;
 let requested = false;
 
-function DrawingBox() {
+function DrawingBox({ viewportRef }) {
   const newAction = useDispatch();
   const [figure, setFigure] = useState({});
   const { drawingStyle, activeSelector, handlerMode } = useSelector((state) => state);
@@ -140,6 +140,7 @@ function DrawingBox() {
   return (
     <Fragment>
       <svg
+        ref={viewportRef}
         className="drawing-box"
         onTouchEnd={handleTouchEnd}
         onTouchMove={handleTouchMove}

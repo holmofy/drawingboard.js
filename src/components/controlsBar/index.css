@@ -21,6 +21,19 @@
   box-shadow: 0 .125rem .4rem rgba(0, 0, 0, .1);
 }
 
+.tool-bar.collapsed .tool-bar-item,
+.tool-bar.collapsed .tool-bar-group {
+  display: none;
+}
+
+.tool-bar .collapsed-indicator {
+  display: none;
+}
+
+.tool-bar.collapsed .collapsed-indicator {
+  display: block;
+}
+
 .tool-bar-group {
   position: relative;
   display: flex;
