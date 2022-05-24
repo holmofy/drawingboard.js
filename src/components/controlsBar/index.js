@@ -87,10 +87,14 @@ function ToolBar() {
       onWheel={handleWheel}
       ref={wrapRef}
     >
-      <div className={Math.abs(transX) > width / 12 ? "tool-bar collapsed" : "tool-bar"}
+      <div className={`tool-bar ${Math.abs(transX) > width / 12 ? 'collapsed' : ''} ${Math.abs(transY) > height / 2 ? 'tool-bar-up' : ''}`}
         onTouchEnd={handleTouchEnd}
         onTouchMove={handleTouchMove}
-        style={{ transform: 'translate(' + transX + 'px, ' + transY + 'px)', transition: onTouch ? "" : "transform .3s" }}>
+        style={{
+          transform: 'translate(' + transX + 'px, ' + transY + 'px)',
+          transition: onTouch ? "width .2s" : "transform .3s,width .2s",
+          width: Math.abs(transX) > width / 12 ? '50px' : '350px'
+        }}>
         <HandlerMode />
         <ColorSelector />
         <FigureSelector />

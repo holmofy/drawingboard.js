@@ -12,6 +12,11 @@
   transform: translateX(90px);
 }
 
+.tool-bar-up .props-selector {
+  top: auto !important;
+  bottom: -180% !important;
+}
+
 .props-selector>div {
   display: flex;
   width: 240px;
