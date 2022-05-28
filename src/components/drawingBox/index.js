@@ -130,9 +130,9 @@ function DrawingBox() {
       if (lastMove) {
         const [x01, y01, x02, y02] = lastMove;
         if (x01 - x1 + y01 - y1 > x02 - x2 + y02 - y2) {
-          scrollBy(x01 - x1, y01 - y1);
+          scrollBy({ left: x01 - x1, top: y01 - y1, behavior: 'smooth' });
         } else {
-          scrollBy(x02 - x2, y02 - y2);
+          scrollBy({ left: x02 - x2, top: y02 - y2, behavior: 'smooth' });
         }
       }
       lastMove = [x1, y1, x2, y2];
