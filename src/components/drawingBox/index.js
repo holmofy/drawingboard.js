@@ -126,16 +126,7 @@ function DrawingBox() {
 
   function handleTouchMove(e) {
     if (e.touches.length === 2) {
-      const { touches: [{ pageX: x1, pageY: y1 }, { pageX: x2, pageY: y2 }] } = e;
-      if (lastMove) {
-        const [x01, y01, x02, y02] = lastMove;
-        if (x01 - x1 + y01 - y1 > x02 - x2 + y02 - y2) {
-          scrollBy({ left: x01 - x1, top: y01 - y1, behavior: 'smooth' });
-        } else {
-          scrollBy({ left: x02 - x2, top: y02 - y2, behavior: 'smooth' });
-        }
-      }
-      lastMove = [x1, y1, x2, y2];
+      moveBy2Touch(e.touches);
       return;
     }
     if (onTouch) {
@@ -144,6 +135,19 @@ function DrawingBox() {
       onTouch = true;
       handleMouseDown(touchToMouse(e));
     }
+  }
+
+  function moveBy2Touch([{ identifier: id1, pageX: x1, pageY: y1 }, { identifier: id2, pageX: x2, pageY: y2 }]) {
+    if (lastMove) {
+      const [x01, y01] = lastMove[id1];
+      const [x02, y02] = lastMove[id2];
+      if (Math.abs(x01 - x1 + y01 - y1) > Math.abs(x02 - x2 + y02 - y2)) {
+        scrollBy({ left: x01 - x1, top: y01 - y1, behavior: 'smooth' });
+      } else {
+        scrollBy({ left: x02 - x2, top: y02 - y2, behavior: 'smooth' });
+      }
+    }
+    lastMove = { [id1]: [x1, y1], [id2]: [x2, y2] };
   }
 
   function handleMouseLeave() {
