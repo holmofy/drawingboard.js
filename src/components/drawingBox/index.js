@@ -19,14 +19,15 @@ let onPainting = false;
 let updated = false;
 let requested = false;
 
-let newFigures;
+let newFigures = null;
+let lastMove = null;
 
 function DrawingBox() {
   const newAction = useDispatch();
   const [figure, setFigure] = useState({});
   const { drawingStyle, activeSelector, handlerMode } = useSelector((state) => state);
   const { figures } = useSelector((state) => state);
-  
+
   newFigures = figures;
   useUnload(function () {
     localStorage.setItem("lastDrawingBoard", JSON.stringify({ id: location.pathname, figures: newFigures }));
@@ -116,6 +117,7 @@ function DrawingBox() {
   }
 
   function handleTouchEnd(e) {
+    lastMove = null;
     if (!onPainting) return true;
     e.preventDefault();
     onTouch = false;
@@ -123,7 +125,19 @@ function DrawingBox() {
   }
 
   function handleTouchMove(e) {
-    if (e.touches.length > 1) return true;
+    if (e.touches.length === 2) {
+      const { touches: [{ pageX: x1, pageY: y1 }, { pageX: x2, pageY: y2 }] } = e;
+      if (lastMove) {
+        const [x01, y01, x02, y02] = lastMove;
+        if (x01 - x1 + y01 - y1 > x02 - x2 + y02 - y2) {
+          scrollBy(x01 - x1, y01 - y1);
+        } else {
+          scrollBy(x02 - x2, y02 - y2);
+        }
+      }
+      lastMove = [x1, y1, x2, y2];
+      return;
+    }
     if (onTouch) {
       handleMouseMove(touchToMouse(e));
     } else {
