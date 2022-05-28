@@ -19,14 +19,17 @@ let onPainting = false;
 let updated = false;
 let requested = false;
 
+let newFigures;
+
 function DrawingBox() {
   const newAction = useDispatch();
   const [figure, setFigure] = useState({});
   const { drawingStyle, activeSelector, handlerMode } = useSelector((state) => state);
   const { figures } = useSelector((state) => state);
-
-  useUnload(e => {
-    localStorage.setItem("lastDrawingBoard", JSON.stringify({ id: location.pathname, figures }));
+  
+  newFigures = figures;
+  useUnload(function () {
+    localStorage.setItem("lastDrawingBoard", JSON.stringify({ id: location.pathname, figures: newFigures }));
   })
 
   useEffect(() => {
@@ -113,12 +116,14 @@ function DrawingBox() {
   }
 
   function handleTouchEnd(e) {
+    if (!onPainting) return true;
     e.preventDefault();
     onTouch = false;
     handleMouseUp();
   }
 
   function handleTouchMove(e) {
+    if (e.touches.length > 1) return true;
     if (onTouch) {
       handleMouseMove(touchToMouse(e));
     } else {
